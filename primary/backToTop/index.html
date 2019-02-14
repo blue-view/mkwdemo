@@ -1,0 +1,77 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+    <title>Javascript 回到顶部效果</title>
+    <!-- <link rel="stylesheet" type="text/css" href="style.css" /> -->
+    <style>
+        .box {
+            width: 1190px;
+            margin: 0 auto;
+        }
+
+        #btn {
+            width: 40px;
+            height: 40px;
+            position: fixed;
+            right: 65px;
+            bottom: 10px;
+            display: none;
+            background: url(http://img.mukewang.com/535e0dc100010e9c00400080.jpg) no-repeat left top;
+        }
+
+        #btn:hover {
+            background: url(http://img.mukewang.com/535e0dc100010e9c00400080.jpg) no-repeat 0 -40px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box">
+        <img src="http://img.mukewang.com/535e0ce800015b7511902787.jpg" />
+    </div>
+    <a href="javascript:;" id="btn" title="回到顶部"></a>
+    <div class="box">
+        <img src="http://img.mukewang.com/535e0ce800015b7511902787.jpg" />
+    </div>
+    <a href="javascript:;" id="btn" title="回到顶部"></a>
+    <script>
+        window.onload = function () {
+            var btn = document.getElementById('btn');
+            var timer = null;
+            var isTop = true;
+            //获取可视区高度
+            var clientHeight = document.documentElement.clientHeight;
+            window.onscroll = function () {
+                var osTop = document.documentElement.scrollTop || document.body.scrollTop;
+                // console.log(clientHeight);
+                if (osTop >= clientHeight) {
+                    btn.style.display = "block";
+                } else {
+                    btn.style.display = "none";
+                }
+                if (!isTop) {
+                    clearInterval(timer);
+                }
+                isTop = false;
+            }
+            btn.onclick = function () {
+                timer = setInterval(function () {
+                    var osTop = document.documentElement.scrollTop || document.body.scrollTop;
+                    var ispeed = Math.floor(-osTop / 8);
+                    // console.log(ispeed);
+                    document.documentElement.scrollTop = document.body.scrollTop = osTop + ispeed;
+                    // console.log(osTop + ispeed);
+                    isTop = true;
+                    if (osTop == 0) {
+                        clearInterval(timer)
+                    }
+                }, 30);
+            }
+        }
+    </script>
+</body>
+
+</html>

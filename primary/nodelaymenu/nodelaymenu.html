@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .wrap {
+            position: relative;
+            width: 200px;
+            left: 20px;
+            top: 50px;
+        }
+
+        ul {
+            padding: 15px 0;
+            /* margin: 9px; */
+            list-style: none;
+            background: #606669;
+            color: #fff;
+            border-right-width: 0;
+        }
+
+        li {
+            display: block;
+            height: 30px;
+            line-height: 30px;
+            padding-left: 12px;
+            cursor: pointer;
+            font-size: 14px;
+            position: relative;
+        }
+
+        li.active {
+            background: #999395;
+        }
+
+        li span:hover {
+            color: #c81623;
+        }
+
+        .none {
+            display: none;
+        }
+
+        #sub {
+            width: 600px;
+            position: absolute;
+            border: 1px solid #f7f7f7;
+            background: #f7f7f7;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, .3);
+            left: 200px;
+            top: 0;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 10px;
+        }
+
+        .sub_content a {
+            font-size: 12px;
+            color: #666;
+            text-decoration: none;
+        }
+
+        .sub_content dd a {
+            border-left: 1px solid #e0e0e0;
+            padding: 0 10px;
+            margin: 4px 0;
+        }
+
+        .sub_content dl {
+            overflow: hidden;
+        }
+
+        .sub_content dt {
+            float: left;
+            width: 70px;
+            font-weight: bold;
+            clear: left;
+            position: relative;
+        }
+
+        .sub_content dd {
+            float: left;
+            margin-left: 5px;
+            margin-top: 1px solid #eee;
+            margin-bottom: 5px;
+        }
+
+        .sub_content dt i {
+            width: 4px;
+            height: 14px;
+            font: 400 9px/14px consolas;
+            position: absolute;
+            right: 5px;
+            top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap" id="test">
+        <ul>
+            <li data-id="a"><span>家用电器</span></li>
+            <li data-id="b"><span>手机/运营商/数码</span></li>
+            <li data-id="c"><span>电脑/办公</span></li>
+            <li data-id="d"><span>家居/家具/家装/厨具</span></li>
+            <li data-id="e"><span>家居/家具/家装/厨具</span></li>
+            <li data-id="f"><span>电脑/办公</span></li>
+            <li data-id="h"><span>家居/家具/家装/厨具</span></li>
+            <li data-id="j"><span>家居/家具/家装/厨具</span></li>
+        </ul>
+        <div id="sub" class="none">
+            <div id="a" class="sub_content none">
+                <dl>
+                    <dt class="a" href="#">电视<i>&gt</i></dt>
+                    <dd>
+                        <a href="#">合资品牌</a>
+                        <a href="#">国产品牌</a>
+                        <a href="#">互联网品牌</a>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="a" href="#">空调<i>&gt</i></dt>
+                    <dd>
+                        <a href="#">合资品牌</a>
+                        <a href="#">国产品牌</a>
+                        <a href="#">互联网品牌</a>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="a" href="#">洗衣机<i>&gt</i></dt>
+                    <dd>
+                        <a href="#">合资品牌</a>
+                        <a href="#">国产品牌</a>
+                        <a href="#">互联网品牌</a>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="a" href="#">冰箱<i>&gt</i></dt>
+                    <dd>
+                        <a href="#">合资品牌</a>
+                        <a href="#">国产品牌</a>
+                        <a href="#">互联网品牌</a>
+                    </dd>
+                </dl>
+            </div>
+            <div id="b" class="sub_content none">
+                <dl>
+                    <dt class="a" href="#">电视1<i>&gt</i></dt>
+                    <dd>
+                        <a href="#">合资品牌</a>
+                        <a href="#">国产品牌</a>
+                        <a href="#">互联网品牌</a>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="a" href="#">空调<i>&gt</i></dt>
+                    <dd>
+                        <a href="#">合资品牌</a>
+                        <a href="#">国产品牌</a>
+                        <a href="#">互联网品牌</a>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="a" href="#">洗衣机<i>&gt</i></dt>
+                    <dd>
+                        <a href="#">合资品牌</a>
+                        <a href="#">国产品牌</a>
+                        <a href="#">互联网品牌</a>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="a" href="#">冰箱<i>&gt</i></dt>
+                    <dd>
+                        <a href="#">合资品牌</a>
+                        <a href="#">国产品牌</a>
+                        <a href="#">互联网品牌</a>
+                    </dd>
+                </dl>
+            </div>
+            <div id="c" class="sub_content none">
+                <dl>
+                    <dt class="a" href="#">电视2<i>&gt</i></dt>
+                    <dd>
+                        <a href="#">合资品牌</a>
+                        <a href="#">国产品牌</a>
+                        <a href="#">互联网品牌</a>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="a" href="#">空调<i>&gt</i></dt>
+                    <dd>
+                        <a href="#">合资品牌</a>
+                        <a href="#">国产品牌</a>
+                        <a href="#">互联网品牌</a>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="a" href="#">洗衣机<i>&gt</i></dt>
+                    <dd>
+                        <a href="#">合资品牌</a>
+                        <a href="#">国产品牌</a>
+                        <a href="#">互联网品牌</a>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="a" href="#">冰箱<i>&gt</i></dt>
+                    <dd>
+                        <a href="#">合资品牌</a>
+                        <a href="#">国产品牌</a>
+                        <a href="#">互联网品牌</a>
+                    </dd>
+                </dl>
+            </div>
+            <div id="d" class="sub_content none">
+                <dl>
+                    <dt class="a" href="#">电视3<i>&gt</i></dt>
+                    <dd>
+                        <a href="#">合资品牌</a>
+                        <a href="#">国产品牌</a>
+                        <a href="#">互联网品牌</a>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="a" href="#">空调<i>&gt</i></dt>
+                    <dd>
+                        <a href="#">合资品牌</a>
+                        <a href="#">国产品牌</a>
+                        <a href="#">互联网品牌</a>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="a" href="#">洗衣机<i>&gt</i></dt>
+                    <dd>
+                        <a href="#">合资品牌</a>
+                        <a href="#">国产品牌</a>
+                        <a href="#">互联网品牌</a>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="a" href="#">冰箱<i>&gt</i></dt>
+                    <dd>
+                        <a href="#">合资品牌</a>
+                        <a href="#">国产品牌</a>
+                        <a href="#">互联网品牌</a>
+                    </dd>
+                </dl>
+            </div>
+            <div id="e" class="sub_content none">
+                <dl>
+                    <dt class="a" href="#">电视4<i>&gt</i></dt>
+                    <dd>
+                        <a href="#">合资品牌</a>
+                        <a href="#">国产品牌</a>
+                        <a href="#">互联网品牌</a>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="a" href="#">空调<i>&gt</i></dt>
+                    <dd>
+                        <a href="#">合资品牌</a>
+                        <a href="#">国产品牌</a>
+                        <a href="#">互联网品牌</a>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="a" href="#">洗衣机<i>&gt</i></dt>
+                    <dd>
+                        <a href="#">合资品牌</a>
+                        <a href="#">国产品牌</a>
+                        <a href="#">互联网品牌</a>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt class="a" href="#">冰箱<i>&gt</i></dt>
+                    <dd>
+                        <a href="#">合资品牌</a>
+                        <a href="#">国产品牌</a>
+                        <a href="#">互联网品牌</a>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="./function.js"></script>
+    <script>
+        $(function () {
+            var sub = $("#sub"),
+                activeRow,
+                activeMenu,
+                mouseInsub = false,
+                mouseTrack = [],
+                timer;
+            sub.on('mouseenter', function () {
+                mouseInsub = true;
+            }).on("mouseleave", function () {
+                mouseInsub = false;
+            });
+            var moveHandler = function (e) {
+                // console.log(e);
+                mouseTrack.push({
+                    x: e.pageX,
+                    y: e.pageY
+                });
+                if (mouseTrack.length > 3) {
+                    mouseTrack.shift();
+                }
+            }
+            $(document).bind("mousemove", moveHandler);
+
+            $("#test").on("mouseenter", function () {
+                sub.removeClass("none");
+            })
+                .on("mouseleave", function () {
+                    sub.addClass('none');
+                    if (activeRow) {
+                        activeRow.removeClass('active');
+                        activeRow = null;
+                    }
+                    if (activeMenu) {
+                        activeMenu.addClass("none");
+                        activeMenu = null;
+                    }
+                    $(document).unbind("mousemove", moveHandler);
+                })
+                .on("mouseenter", "li", function (e) {
+                    if (!activeRow) {
+                        activeRow = $(e.target).addClass('active');
+                        activeMenu = $("#" + activeRow.data("id"));
+                        activeMenu.removeClass('none');
+                        return;
+                    }
+
+
+                    if (timer) {
+                        clearTimeout(timer);
+                    }
+
+                    var currMousPos = mouseTrack[mouseTrack.length - 1];
+                    var leftCorner = mouseTrack[mouseTrack.length - 2];
+
+                    var delay = needDelay(sub, leftCorner, currMousPos);
+                    if (delay) {
+                        timer = setTimeout(function () {
+                            if (mouseInsub) {
+                                return;
+                            }
+                            activeRow.removeClass('active');
+                            activeMenu.addClass('none');
+
+                          
+                            activeRow.addClass('active');
+                         
+                            activeMenu.removeClass('none');
+                            timer = null;
+                        }, 300);
+                    }
+                    else{
+                        var prevActiveRow=activeRow;
+                        var prevActiveMenu=activeMenu;
+                        activeRow = $(e.target);
+                        activeMenu = $("#" + activeRow.data("id"));
+
+                        prevActiveRow.removeClass('active');
+                        prevActiveMenu.addClass('none');
+
+                        activeRow.addClass("active");
+                        activeMenu.removeClass('none');
+                    }
+                });
+
+        });
+    </script>
+</body>
+
+</html>
