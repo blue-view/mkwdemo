@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>多物体运动-宽度</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        ul li {
+            list-style: none;
+            width: 100px;
+            height: 50px;
+            background: yellow;
+            margin-bottom: 20px;
+            border:4px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <script>
+        function getStyle(obj, attr) {
+            if (obj.currentStyle) {
+                return obj.currentStyle[attr];
+            }
+            else {
+                return getComputedStyle(obj, false)[attr];
+            }
+        }
+        window.onload = function () {
+            var ali = document.getElementsByTagName("li");
+            for (var i = 0; i < ali.length; i++) {
+                ali[i].timer = null;
+                ali[i].onmouseover = function () {
+                    moveStart(this, 200)
+                }
+                ali[i].onmouseout = function () {
+                    moveStart(this, 100)
+                }
+            }
+            function moveStart(obj, target) {
+                clearInterval(obj.timer);
+                obj.timer = setInterval(function () {
+                    var distance =parseInt( getStyle(obj,"width"));
+                    // console.log(distance);
+                    var speed = (target - distance) / 10;
+                    speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+                    if (distance == target) {
+                        clearInterval(obj.timer);
+                    }
+                    else {
+                        obj.style.width = distance + speed + "px";
+                    }
+                }, 50);
+
+            }
+
+        }
+    </script>
+</body>
+
+</html>

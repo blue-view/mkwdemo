@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- 页面字符编码 -->
+    <meta charset="utf-8">
+    <!-- 避免IE使用兼容模式 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <!-- 启用360浏览器的极速模式(webkit) -->
+    <meta name="renderer" content="webkit">
+    <!-- 微软的老式浏览器 -->
+    <meta name="MobileOptimized" content="320">
+    <!-- 关键字描述 -->
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <!-- 设置移动端视图 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <!-- 针对手持设备优化，主要是针对一些老的不识别viewport的浏览器，比如黑莓 -->
+    <meta name="HandheldFriendly" content="true">
+    <!-- 删除苹果默认的工具栏和菜单栏 -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!-- 设置苹果工具栏颜色 -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <!-- 忽略页面中的数字识别为电话，忽略email识别 -->
+    <meta name="format-detection" content="telphone=no, email=no" />
+    <!-- uc强制竖屏 -->
+    <meta name="screen-orientation" content="portrait">
+    <!-- QQ强制竖屏 -->
+    <meta name="x5-orientation" content="portrait">
+    <!-- UC强制全屏 -->
+    <meta name="full-screen" content="yes">
+    <!-- QQ强制全屏 -->
+    <meta name="x5-fullscreen" content="true">
+    <!-- UC应用模式 -->
+    <meta name="browsermode" content="application">
+    <!-- QQ应用模式 -->
+    <meta name="x5-page-mode" content="app">
+    <!-- windows phone 点击无高光 -->
+    <meta name="msapplication-tap-highlight" content="no">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            font-size: 12px;
+            padding: 20px;
+        }
+
+        .btngroup button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 20px 0;
+            background-color: green;
+            border-radius: 10px;
+            color: #fff;
+            border: 1px solid #eee;
+        }
+    </style>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="./font_icon/iconfont.css">
+    <link rel="stylesheet" href="./dialog.css">
+    <!-- <script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script> -->
+    <script src="./zepto.js"></script>
+    <script src="./touch.js"></script>
+    <script src="./Dialog.js"></script>
+</head>
+
+<body>
+    <!--icon iconfont icon-ok
+        icon iconfont icon-loading
+        icon iconfont icon-warning
+     -->
+    <div class="btngroup">
+        <button id="btn1">没有传递任何参数</button>
+        <button id="btn2">弹出一个不需要带任何按钮，且是警告的框，并且2秒后自动关闭</button>
+        <button id="btn3">弹出一个有确认和取消按钮的成功框，点击按钮直接关闭</button>
+        <button id="btn4">弹出一个有确认按钮的警告框，点击按钮不关闭（需要手动关闭）</button>
+        <button id="btn5">弹出一个多组合的按钮框，且按钮样式可定制</button>
+        <button id="btn6">弹出一个确认和删除按钮，点击确认弹出加载框2秒自动关闭，点击删除按钮把上一次框关闭</button>
+    </div>
+    <script>
+        $("#btn1").tap(function () {
+            var d = $.dialog();
+        });
+        $("#btn2").tap(function () {
+            var d = $.dialog({
+                type: "warning",
+                delay: 2000,
+                message: "2秒钟后关闭"
+            });
+        });
+        $("#btn3").tap(function () {
+            var d = $.dialog({
+                type: "ok",
+                message: "点击关闭按钮",
+                buttons: [
+                    {
+                        type: "green",
+                        text: '确认',
+                    },
+                    {
+                        type: "red",
+                        text: '取消',
+                    }],
+                    effect:true
+            });
+        });
+
+        $("#btn4").tap(function () {
+            var d = $.dialog({
+                type: "warning",
+                message: "点击按钮不关闭",
+                buttons: [
+                    {
+                        type: "red",
+                        text: '确认',
+                        callback: function () {
+                            return false;
+                        }
+                    }]
+            });
+        });
+        $("#btn5").tap(function () {
+            var d = $.dialog({
+                type: "loading",
+                message: "点击关闭按钮",
+                buttons: [
+                    {
+                        type: "green",
+                        text: '确认',
+                        callback: function () {
+                            alert('点击关闭');
+                        }
+                    },
+                    {
+                        type: "red",
+                        text: '删除',
+                        callback: function () {
+                            alert('点击关闭');
+                            return false;
+                        }
+                    },
+                    {
+                        text: '默认',
+                        callback: function () {
+                            alert('点击关闭');
+                        }
+                    },
+                ]
+            });
+        });
+        $("#btn6").tap(function () {
+            var d = $.dialog({
+                type: "ok",
+                message: "弹出一个确认和删除按钮,点击删除按钮把上一次框关闭",
+                buttons: [
+                    {
+                        type: "green",
+                        text: '确认',
+                        callback: function () {
+                            $.dialog({
+                                type: 'loading',
+                                delay: 2000,
+                                massage: "2秒自动关闭"
+                            });
+                            return false;
+                        }
+                    },
+                    {
+                        type: "red",
+                        text: '删除',
+                        callback: function () {
+                            d.close();
+                            return false;
+                        }
+                    },
+                    {
+                        text: '删除',
+                        callback: function () {
+                            $.dialog({
+                                type: 'ok',
+                                buttons: [
+                                    {
+                                        type: "green",
+                                        text: '确认',
+                                        callback: function () {
+                                            d.close();
+                                            return false;
+                                        }
+                                    }]
+                            });
+                            return false;
+                        }
+                    }
+                ],
+
+            });
+        });
+
+
+        $(function () {
+            //     var d = $.dialog({
+            //         type: 'warning',
+            //         message: '你还好吗~',
+            //         // width: 200,
+            //         // delay: 1000,
+            //         buttons: [
+            //             {
+            //                 type: "red",
+            //                 text: '不好',
+            //                 callback: function () { 
+            //                     alert("不好");
+            //                 }
+            //             },
+            //             {
+            //                 type: "green",
+            //                 text: '好',
+            //                 callback: function () {
+            //                     alert("hao");
+            //                     return false;
+            //                  }
+            //             }
+            //         ]
+            //     });
+            // 
+
+        });
+    </script>
+</body>
+
+</html>

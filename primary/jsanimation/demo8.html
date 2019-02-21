@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>链式运动</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        ul li {
+            list-style: none;
+            width: 100px;
+            height: 50px;
+            background: yellow;
+            margin-bottom: 20px;
+            border: 4px solid red;
+        }
+
+        ul li:nth-of-type(1) {
+            opacity: .3;
+            filter: alpha(opacity:30);
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li id="li1"></li>
+    </ul>
+    <script>
+        function getStyle(obj, attr) {
+            if (obj.currentStyle) {
+                return obj.currentStyle[attr];
+            }
+            else {
+                return getComputedStyle(obj, false)[attr];
+            }
+        }
+        window.onload = function () {
+            var ali1 = document.getElementById("li1");
+            ali1.timer = null;
+            ali1.onmouseover = function () {
+                moveStart(ali1, "width", 200, function () {
+                    moveStart(ali1, "height", 200, function () {
+                        moveStart(ali1, "opacity", 100);
+                    });
+                });
+            }
+            ali1.onmouseout = function () {
+                moveStart(ali1, "opacity", 30, function () {
+                    moveStart(ali1, "height", 50, function () {
+                        moveStart(ali1, "width", 100);
+                    });
+                });
+            }
+
+            function moveStart(obj, attr, target, callback) {
+
+                clearInterval(obj.timer);
+                obj.timer = setInterval(function () {
+                    if (attr == "opacity") {
+                        distance = Math.round(parseFloat(getStyle(obj, attr)) * 100);
+
+                    }
+                    else {
+                        distance = parseInt(getStyle(obj, attr));
+                    }
+                    var speed = (target - distance) / 10;
+                    speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+                    if (distance == target) {
+                        clearInterval(obj.timer);
+                        callback && callback();
+                    }
+                    else {
+
+                        if (attr == "opacity") {
+                            obj.style.filter = "alpha(opactiy:" + (distance + speed) + ")"
+                            obj.style.opacity = (distance + speed) / 100;
+                        }
+                        else {
+                            obj.style[attr] = distance + speed + "px";
+                        }
+
+                    }
+                }, 50);
+
+            }
+
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+
+.g-dialog-container{
+    position: fixed;
+    left:0;
+    top:0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    /* display: -webkit-box;
+    -webkit-box-pack: center;
+    -webkit-box-align: center; */
+    display: flex;
+    display:-webkit-flex;
+    justify-content: center;
+    -webkit-justify-content:center;
+    align-items: center;
+    -webkit-align-items: center;
+    z-index: 100000;
+}
+
+.g-dialog-container .diglog-window{
+    padding:1em;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.8);
+    transition: all 1s cubic-bezier(0.25, 0.1, 0.26, 1.42);
+}
+.g-dialog-container .diglog-window .dialog-header{
+    width: 50px;
+    height: 50px;
+    margin: 0 auto;
+    display: flex;
+    display:-webkit-flex;
+    justify-content: center;
+    -webkit-justify-content:center;
+    align-items: center;
+    -webkit-align-items: center;
+    font-size: 60px;
+}
+.g-dialog-container .diglog-window .ok{
+    color: #00ff00;
+}
+.g-dialog-container .diglog-window .warning{
+    color: #ff0000;
+}
+.g-dialog-container .diglog-window .loading{
+    color: #fff;
+}
+.g-dialog-container .diglog-window .dialog-content{
+    padding:1em 1em 0;
+    color: #fff;
+}
+.g-dialog-container .diglog-window .dialog-footer{
+    padding:1em 1em 0;
+    display: flex;
+    display:-webkit-flex;
+    justify-content: center;
+    -webkit-justify-content:center;
+    align-items: center;
+    -webkit-align-items: center;
+}
+.g-dialog-container .diglog-window .dialog-footer button{
+    display: inline;
+    -webkit-appearance: none;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 0.8em 1.8em ;
+    border:none;
+    color: #eee;
+    border-radius: 5px;
+    margin:0 .5em;
+    text-shadow: #666 1px 1px 0;
+
+}
+.g-dialog-container .diglog-window .dialog-footer button.green{
+    background-color:green;
+}
+.g-dialog-container .diglog-window .dialog-footer button.red{
+    background-color:red;
+}

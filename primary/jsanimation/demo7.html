@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>多物体运动-多属性</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        ul li {
+            list-style: none;
+            width: 100px;
+            height: 50px;
+            background: yellow;
+            margin-bottom: 20px;
+            border: 4px solid red;
+        }
+
+        ul li:nth-of-type(3) {
+            opacity: .3;
+            filter: alpha(opacity:30);
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li id="li1"></li>
+        <li id="li2"></li>
+        <li id="li3"></li>
+    </ul>
+    <script>
+        function getStyle(obj, attr) {
+            if (obj.currentStyle) {
+                return obj.currentStyle[attr];
+            }
+            else {
+                return getComputedStyle(obj, false)[attr];
+            }
+        }
+        window.onload = function () {
+            var ali1 = document.getElementById("li1");
+            var ali2 = document.getElementById("li2");
+            var ali3 = document.getElementById("li3");
+            // for (var i = 0; i < ali.length; i++) {
+            //     ali[i].timer = null;
+            ali1.onmouseover = function () {
+                moveStart(this, "width", 200)
+            }
+            ali1.onmouseout = function () {
+                moveStart(this, "width", 100)
+            }
+            ali2.onmouseover = function () {
+                moveStart(this, "height", 100)
+            }
+            ali2.onmouseout = function () {
+                moveStart(this, "height", 50)
+            }
+            ali3.onmouseover = function () {
+                moveStart(this, "opacity", 100)
+            }
+            ali3.onmouseout = function () {
+                moveStart(this, "opacity", 30)
+            }
+            // }
+            function moveStart(obj, attr, target) {
+
+                clearInterval(obj.timer);
+                obj.timer = setInterval(function () {
+                    if (attr == "opacity") {
+                        distance =Math.round(parseFloat(getStyle(obj, attr)) * 100);
+
+                    }
+                    else {
+                        distance = parseInt(getStyle(obj, attr));
+                    }
+                    var speed = (target - distance) / 10;
+                    speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+                    if (distance == target) {
+                        clearInterval(obj.timer);
+                    }
+                    else {
+
+                        if (attr == "opacity") {
+                            obj.style.filter = "alpha(opactiy:" + (distance + speed) + ")"
+                            obj.style.opacity = (distance + speed) / 100;
+                        }
+                        else {
+                            obj.style[attr] = distance + speed + "px";
+                        }
+
+                    }
+                }, 50);
+
+            }
+
+        }
+    </script>
+</body>
+
+</html>

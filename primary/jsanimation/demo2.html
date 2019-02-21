@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>JS缓冲动画</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .shareWrap {
+            width: 200px;
+            height: 150px;
+            background: burlywood;
+            margin-top: 50px;
+            position: relative;
+            left: -200px;
+        }
+
+        .shareWrap .share {
+            display: inline-block;
+            width: 22px;
+            background: aquamarine;
+            padding: 2px 4px;
+            position: absolute;
+            top: 0;
+            right: -30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="shareWrap" id="shareWrap">
+        <span class="share">分享</span>
+    </div>
+    <script>
+        window.onload = function () {
+            var box = document.getElementById('shareWrap');
+            box.onmouseover = function () {
+                moveStart(0);
+            }
+            box.onmouseleave = function () {
+                moveStart(-200);
+            }
+            var timer = null;
+            function moveStart(target) {
+                clearInterval(timer);
+                // var box=document.getElementById('shareWrap');
+               
+                timer = setInterval(function () {
+                    var distance = box.offsetLeft;
+                    var speed = (target-distance)/10;
+                    speed=speed>0?Math.ceil(speed):Math.floor(speed);
+                    if (distance == target) {
+                        clearInterval(timer);
+                    }
+                    else {
+                        box.style.left = distance + speed + "px";
+                    }
+                }, 50);
+
+            }
+        }
+    </script>
+</body>

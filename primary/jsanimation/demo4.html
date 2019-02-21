@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>多物体运动-透明度</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        ul li {
+            list-style: none;
+            width: 100px;
+            height: 50px;
+            background: yellow;
+            margin-bottom: 20px;
+            opacity:.3;
+            filter: alpha(opacity:30);
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <script>
+        window.onload = function () {
+            var ali = document.getElementsByTagName("li");
+            for (var i = 0; i < ali.length; i++) {
+                ali[i].timer=null;
+                ali[i].alpha=30;
+                ali[i].onmouseover = function () {
+                    moveStart(this, 100)
+                }
+                ali[i].onmouseout = function () {
+                    moveStart(this, 30)
+                }
+            }
+            function moveStart(obj,target) {
+                clearInterval(obj.timer);
+                var speed = 10;
+                obj.timer = setInterval(function () {
+                    if (obj.alpha > target) {
+                        speed = -10;
+                    }
+                    else {
+                        speed = 10;
+                    }
+                    if (obj.alpha  == target) {
+                        clearInterval(obj.timer);
+                    }
+                    else {
+                        obj.alpha+=speed;
+                        obj.style.filter="alpha(opacity:"+obj.alpha +")";
+                        obj.style.opacity=obj.alpha /100;
+                    }
+                }, 50);
+
+            }
+        }
+    </script>
+</body>
+
+</html>
