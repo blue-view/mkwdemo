@@ -128,15 +128,7 @@ li {
         -moz-osx-font-smoothing: grayscale;
       }
       
-      @media only screen and (max-width:808px){
-
-      }
-      @media only screen and (max-width:481px)and (max-width:800px){
-          
-    }
-    @media only screen and (max-width:480px){
-    
-    }
+   
     .info{
         width:100%;
         height: auto;
@@ -146,7 +138,6 @@ li {
         padding: 0.5rem;
         border-radius: 0.5rem;
         box-shadow: 0 3px 2px rgb(104, 97, 97);
-        
     }
     .info h2.baseInfo::before{
         content: "\e626";
@@ -228,3 +219,32 @@ li {
      visibility: hidden;
        
    }
+
+/* @media only screen and (max-width:50rem){
+
+}
+@media only screen and (max-width:30.0625rem)and (max-width:50rem){
+    
+} */
+@media only screen and (max-width:20em){
+    .infoline,.info-exp{
+        width:100%;
+        display: block;
+    }
+    .infoline-left,.infoline-right{
+        width:100%;
+    }
+    .info-exp span{
+        display: inline-block;
+    }
+    .info-exp span:nth-child(1){
+        width:100%;
+    }
+    .info-exp span:nth-child(2){
+        width:100%;
+        padding-left:0;
+     }
+     .info-exp span:nth-child(3){
+        width:100%;
+     }
+}
