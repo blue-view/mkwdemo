@@ -145,6 +145,7 @@ li {
         background: #ccc;
         padding: 0.5rem;
         border-radius: 0.5rem;
+        box-shadow: 0 3px 2px rgb(104, 97, 97);
         
     }
     .info h2.baseInfo::before{
@@ -218,7 +219,6 @@ li {
        border-radius: 50%;
        background: rgb(34, 32, 32);
        margin-right: 0.5rem;
-       /* margin-top:0.5rem; */
    }
    .infoorder {
        display: flex;
@@ -228,6 +228,3 @@ li {
      visibility: hidden;
        
    }
-   /* .eduformat span{
-       flex-grow: 1;
-   } */
