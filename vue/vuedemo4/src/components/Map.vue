@@ -29,6 +29,7 @@ Vue.use(VueAMap);
 VueAMap.initAMapApiLoader({
   key: "0ee3c9b7aee067d80e0c03ecb11de27a",
   plugin: [
+    'AMap.Geolocation',
     "AMap.Autocomplete",
     "AMap.PlaceSearch",
     "AMap.Scale",
