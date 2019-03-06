@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="x5-orientation" content="portrait" />
+  <meta name="x5-fullscreen" content="true" />
+  <meta name="screen-orientation" content="portrait">
+  <meta name="full-screen" content="yes">
+  <meta name="format-detection" content="telephone=no, email=no" />
+  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+  <title>学习vue</title>
+  <script>
+    (function () {
+      var html = document.documentElement;
+      var hWidth = html.getBoundingClientRect().width;
+      html.style.fontSize = hWidth / 10 + "px";
+      if (hWidth > 540) {
+        html.style.fontSize = "54px";
+      }
+      // console.log(html.style.fontSize);
+      window.onresize = function () {
+        window.location.reload();
+      }
+    })()
+  </script>
+</head>
+
+<body>
+  <noscript>
+    <strong>We're sorry but mkwmobile doesn't work properly without JavaScript enabled. Please enable it to
+      continue.</strong>
+  </noscript>
+  <div id="app"></div>
+  <!-- built files will be auto injected -->
+</body>
+
+</html>
