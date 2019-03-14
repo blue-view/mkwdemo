@@ -1,5 +1,5 @@
 {
-  "name": "vuedemo4",
+  "name": "vue-music-demo",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,21 +10,29 @@
   "dependencies": {
     "axios": "^0.18.0",
     "mint-ui": "^2.2.13",
-    "quill": "^1.3.6",
-    "quill-image-drop-module": "^1.0.3",
     "vue": "^2.6.6",
-    "vue-amap": "^0.5.8",
-    "vue-quill-editor": "^3.0.6"
+    "vue-cookies": "^1.5.12",
+    "vue-router": "^3.0.2",
+    "vue-touch": "^2.0.0-beta.4",
+    "vuex": "^3.1.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.4.0",
     "@vue/cli-plugin-eslint": "^3.4.0",
     "@vue/cli-service": "^3.4.0",
     "babel-eslint": "^10.0.1",
+    "css-loader": "^2.1.1",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0",
-    "mock": "^0.1.1",
-    "mockjs": "^1.0.1-beta3",
+    "node-sass": "^4.11.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "style-resources-loader": "^1.2.1",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2",
+    "vue-cli-plugin-cube-ui": "^0.2.4",
+    "vue-cli-plugin-style-resources-loader": "^0.1.3",
+    "vue-style-loader": "^4.1.2",
     "vue-template-compiler": "^2.5.21"
   },
   "eslintConfig": {
@@ -49,6 +57,15 @@
   "browserslist": [
     "> 1%",
     "last 2 versions",
-    "not ie <= 8"
-  ]
+    "not ie <= 8",
+    "not ie <= 11",
+    "Android >= 4.0",
+    "iOS >= 8"
+  ],
+  "transformModules": {
+    "cube-ui": {
+      "transform": "cube-ui/src/modules/${member}",
+      "kebabCase": true
+    }
+  }
 }

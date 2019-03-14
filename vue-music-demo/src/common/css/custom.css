@@ -1,0 +1,31 @@
+.mint-swipe-indicator.is-active{
+    background-color:#ff0000;
+}
+.mint-search-list {
+    overflow: auto;
+    padding-top: 0px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    position:static;
+}
+.mint-searchbar{
+    background: #f4f4f4;
+}
+.mint-searchbar-inner .mintui-search{
+    font-size: 18px;
+    color: rgba(0,0,0,.3);
+}
+.mint-searchbar-inner .mint-searchbar-core{
+    text-indent: 12px;
+    font-size: 14px;
+    color: rgba(0,0,0,.3)
+}
+.mint-searchbar-cancel{
+    color: #555;
+    font-size: 14px;
+}
+.mint-search {
+    height: auto;
+}
