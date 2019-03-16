@@ -7,7 +7,6 @@ import 'mint-ui/lib/style.css'
 import './common/css/custom.css'
 
 
-
 Vue.use(MintUI)
 Vue.prototype.$getHttp = getHttp
 Vue.prototype.$postHttp = postHttp
