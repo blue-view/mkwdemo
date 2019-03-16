@@ -52,7 +52,7 @@
     </mt-search>
     <div class="searchHot" v-show="isShowSearchHot">
       <h3 class="result_tit">热门搜索</h3>
-      <span v-for="(item,index) in hotSearch" :key="index">
+      <span v-for="(item,index) in hotSearch" :key="index" @click="searchSong(item.first)">
         {{
         item.first
         }}
@@ -151,6 +151,7 @@ export default {
     searchSong(keyWord) {
       if (keyWord != "") {
         var that = this;
+        this.keyWord=keyWord;
         var baseUrl = this.$apiUrl.BaseUrl;
         this.$getHttp(
           baseUrl +

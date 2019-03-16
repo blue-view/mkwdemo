@@ -14,6 +14,9 @@
 </template>
 
 <script>
+import {Cookies} from '@/common/js/cookies'
+// Cookies.set("key",1);
+// console.log(Cookies.get("key"));
 let links = [
   {
     name: "index",
@@ -37,12 +40,13 @@ export default {
   data() {
     return {
       links: links,
-      currentIndex: 0
+      currentIndex: Cookies.get("nav")?Cookies.get("nav"):0
     };
   },
   methods: {
     changeNav: function(index) {
       this.currentIndex = index;
+      Cookies.set("nav",index);
     }
   }
 };
