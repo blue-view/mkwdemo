@@ -71,6 +71,9 @@ export function ApiUrl() {
     TopList:'top/list?idx=',
     HotPlayList:'top/playlist?limit=6&order=new',//精选歌单,
     Search:'search?keywords=',
-    SearchHot:'search/hot'
+    SearchHot:'search/hot',
+    SongMp3Url:'song/url?id=',
+    SongLyric:'lyric?id='
+
   }
 }

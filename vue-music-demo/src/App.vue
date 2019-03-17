@@ -4,14 +4,11 @@
     <MContent/>
     <div class="play-bar">
       <aplayer
-      ref="aplayer"
-        autoplay
-        :music="{
-                title: 'secret base~君がくれたもの~',
-                artist: 'Silent Siren',
-                src: 'https://moeplayer.b0.upaiyun.com/aplayer/secretbase.mp3',
-                pic: 'https://moeplayer.b0.upaiyun.com/aplayer/secretbase.jpg'
-              }"
+        ref="aplayer"
+        autoplay="true"
+        showLrc='true'
+        :music="music"
+        v-show="music.flag"
       />
     </div>
   </div>
@@ -19,10 +16,11 @@
  
 <script>
 // import HelloWorld from "./components/HelloWorld.vue";
-import MHead from "./components/MHead"
-import MContent from "./components/MContent"
-import Vue from "vue"
-import Aplayer from "vue-aplayer"
+import MHead from "./components/MHead";
+import MContent from "./components/MContent";
+import Vue from "vue";
+import Aplayer from "vue-aplayer";
+import { mapState } from "vuex";
 
 Vue.use(Aplayer);
 
@@ -31,11 +29,14 @@ export default {
   components: {
     MHead,
     MContent,
-    Aplayer
+    Aplayer,
   },
-  mounted:function(){
-    var aplayer=this.$refs.aplayer;
-    aplayer.$el.style.margin=0;
+  computed: mapState({
+    music: state => state.music
+  }),
+  mounted: function() {
+    var aplayer = this.$refs.aplayer;
+    aplayer.$el.style.margin = 0;
   }
 };
 </script>
@@ -58,10 +59,10 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.play-bar{
-  width:100%;
-  position:fixed;
+.play-bar {
+  width: 100%;
+  position: fixed;
   bottom: 0;
-  z-index: 100
+  z-index: 100;
 }
 </style>

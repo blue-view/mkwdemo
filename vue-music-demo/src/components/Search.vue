@@ -25,7 +25,12 @@
           ref="loadmore"
         >
           <!-- @top-status-change="handleTopChange" -->
-          <div :key="item.id" v-for="item in songs.temArr" class="m-search-list">
+          <div
+            @click="getSongInfo(item)"
+            :key="item.id"
+            v-for="item in songs.temArr"
+            class="m-search-list"
+          >
             <span class="iconfont m-search-list-l">&#xe9d5;</span>
             <span class="m-search-list-r">
               <span class="m-search-list-l-title-cls">{{item.keyWord}}</span>
@@ -62,6 +67,9 @@
 </template>
 
 <script>
+import axios from "axios";
+import vue from "vue";
+
 export default {
   name: "search",
   data: function() {
@@ -95,6 +103,29 @@ export default {
       this.$refs.wrapper.getBoundingClientRect().top;
   },
   methods: {
+    getSongInfo(item) {
+      var that = this;
+      var baseUrl = this.$apiUrl.BaseUrl;
+      var songMp3Url = baseUrl + this.$apiUrl.SongMp3Url + item.id;
+      var songLyric = baseUrl + this.$apiUrl.SongLyric + item.id;
+      // console.log(item);
+      axios.all([this.$getHttp(songMp3Url), this.$getHttp(songLyric)]).then(
+        axios.spread(function(songMp3Url, songLyric) {
+          // console.log(songMp3Url);
+          // console.log(songLyric);
+          var music = {};
+          music["title"] = item.albumName;
+          music["artist"] = item.artistsName;
+          music["src"] = songMp3Url.data.data[0].url;
+          music["pic"] = item.img1v1Url;
+          music["lrc"] = songLyric.data.lrc && songLyric.data.lrc.lyric;
+          music["theme"] = "pic";
+          music["flag"]=true;
+          
+          that.$store.dispatch("playMusic", music);
+        })
+      );
+    },
     loadBottom() {
       var that = this;
       var totalData = this.songs["temArr"];
@@ -126,6 +157,7 @@ export default {
                 id: obj.id,
                 artistsName: obj.artists[0] && obj.artists[0].name,
                 albumName: obj.album && obj.album.name,
+                img1v1Url: obj.artists[0] && obj.artists[0].img1v1Url,
                 keyWord: obj.name
               });
             }
@@ -151,7 +183,7 @@ export default {
     searchSong(keyWord) {
       if (keyWord != "") {
         var that = this;
-        this.keyWord=keyWord;
+        this.keyWord = keyWord;
         var baseUrl = this.$apiUrl.BaseUrl;
         this.$getHttp(
           baseUrl +
@@ -172,7 +204,8 @@ export default {
                 id: obj.id,
                 artistsName: obj.artists[0] && obj.artists[0].name,
                 albumName: obj.album && obj.album.name,
-                keyWord: obj.name
+                keyWord: obj.name,
+                img1v1Url: obj.artists[0] && obj.artists[0].img1v1Url
               });
             }
             // temObj["showData"] = temArr.slice(0, 10);
