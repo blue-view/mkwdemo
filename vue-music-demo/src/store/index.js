@@ -5,17 +5,26 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
-        music: {}
+        playPrama: {
+            music:{
+                pic:'',
+                title:'',
+                lrc:'',
+                url:'',
+                author:''
+            },
+            list:[]
+        }
     },
     getters: {},
     mutations: {
-        playMusic(state, music) {
-            this.state.music = Object.assign({}, state.music, music);
+        playMusic(state, playPrama) {
+            this.state.playPrama = Object.assign({}, state.playPrama, playPrama);
         }
     },
     actions: {
-        playMusic(context,music){
-            context.commit('playMusic',music);
+        playMusic(context,playPrama){
+            context.commit('playMusic',playPrama);
         }
     }
 })

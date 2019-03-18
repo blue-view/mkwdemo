@@ -6,9 +6,10 @@
       <aplayer
         ref="aplayer"
         autoplay="true"
-        showLrc='true'
-        :music="music"
-        v-show="music.flag"
+        showLrc="true"
+        :music="playPrama['music']"
+        v-if="playPrama['flag']"
+        :list="playPrama['list']"
       />
     </div>
   </div>
@@ -29,15 +30,31 @@ export default {
   components: {
     MHead,
     MContent,
-    Aplayer,
+    Aplayer
+  },
+  watch: {
+    playPrama: {
+      deep: true,
+      handler: function(newVal, oldVal) {
+        this.$nextTick(function() {
+          if (newVal.flag) {
+            var aplayer = this.$refs.aplayer;
+            aplayer.$el.style.margin = 0;
+            if (newVal.list.length > 0) {
+              aplayer.$children[3].$refs.list.style =
+                "height:" +
+                window.innerHeight * 0.3 +
+                "px;overflow-y:auto;max-height:250px";
+            }
+          }
+        });
+      }
+    }
   },
   computed: mapState({
-    music: state => state.music
+    playPrama: state => state.playPrama
   }),
-  mounted: function() {
-    var aplayer = this.$refs.aplayer;
-    aplayer.$el.style.margin = 0;
-  }
+  mounted: function() {}
 };
 </script>
 

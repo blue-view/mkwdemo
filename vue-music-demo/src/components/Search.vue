@@ -44,13 +44,13 @@
             </span>
           </div>-->
           <div slot="bottom" class="mint-loadmore-bottom">
-            <span
+            <!-- <span
               v-show="bottomStatus !== 'loading'"
               :class="{ 'is-rotate': bottomStatus === 'drop' }"
             >↑</span>
             <span v-show="bottomStatus === 'loading'">
               <mt-spinner type="snake"></mt-spinner>
-            </span>
+            </span> -->
           </div>
         </mt-loadmore>
       </div>
@@ -75,7 +75,9 @@ export default {
   data: function() {
     return {
       keyWord: "",
-      songs: {},
+      songs: {
+        temArr: []
+      },
       hotSearch: [],
       isShowSearchHot: true,
       allLoaded: false,
@@ -105,30 +107,27 @@ export default {
   methods: {
     getSongInfo(item) {
       var that = this;
+      var playPrama = {};
       var baseUrl = this.$apiUrl.BaseUrl;
-      var songMp3Url = baseUrl + this.$apiUrl.SongMp3Url + item.id;
-      var songLyric = baseUrl + this.$apiUrl.SongLyric + item.id;
-      // console.log(item);
-      axios.all([this.$getHttp(songMp3Url), this.$getHttp(songLyric)]).then(
+      var songMp3Url = baseUrl + that.$apiUrl.SongMp3Url + item.id;
+      var songLyric = baseUrl + that.$apiUrl.SongLyric + item.id;
+      var currentSong = that.songs["temArr"].filter(function(song) {
+        return item.id == song.id;
+      });
+      playPrama["music"] = currentSong[0];
+      playPrama["flag"] = true;
+      playPrama["list"] = that.songs["temArr"];
+      axios.all([that.$getHttp(songMp3Url), that.$getHttp(songLyric)]).then(
         axios.spread(function(songMp3Url, songLyric) {
-          // console.log(songMp3Url);
-          // console.log(songLyric);
-          var music = {};
-          music["title"] = item.albumName;
-          music["artist"] = item.artistsName;
-          music["src"] = songMp3Url.data.data[0].url;
-          music["pic"] = item.img1v1Url;
-          music["lrc"] = songLyric.data.lrc && songLyric.data.lrc.lyric;
-          music["theme"] = "pic";
-          music["flag"]=true;
-          
-          that.$store.dispatch("playMusic", music);
+          playPrama["music"]["src"] = songMp3Url.data.data[0].url;
+          playPrama["music"]["lrc"] =
+            songLyric.data.lrc && songLyric.data.lrc.lyric;
+          that.$store.dispatch("playMusic", playPrama);
         })
       );
     },
     loadBottom() {
       var that = this;
-      var totalData = this.songs["temArr"];
       var totalValue = this.songs["songCount"];
       var limit = 10;
       var baseUrl = this.$apiUrl.BaseUrl;
@@ -136,7 +135,6 @@ export default {
         totalValue % limit == 0
           ? parseInt(totalValue / limit)
           : parseInt(totalValue / limit) + 1;
-      var lastValue = 0;
       this.currentPage = this.currentPage + 1;
 
       var url =
@@ -147,7 +145,7 @@ export default {
         (this.currentPage - 1) * limit +
         "&limit=" +
         limit;
-      if (lastValue < totalValue) {
+      if (this.currentPage < pageTotal) {
         this.$getHttp(url).then(function(res) {
           if (res.data.code == 200) {
             var itemObj = res.data.result.songs;
@@ -155,10 +153,16 @@ export default {
               var obj = itemObj[t];
               that.songs["temArr"].push({
                 id: obj.id,
+                artist: obj.artists[0] && obj.artists[0].name,
                 artistsName: obj.artists[0] && obj.artists[0].name,
                 albumName: obj.album && obj.album.name,
                 img1v1Url: obj.artists[0] && obj.artists[0].img1v1Url,
-                keyWord: obj.name
+                keyWord: obj.name,
+
+                title: obj.album && obj.album.name,
+                pic: obj.artists[0] && obj.artists[0].img1v1Ur,
+                lrc: "",
+                src: ""
               });
             }
           }
@@ -196,19 +200,29 @@ export default {
           if (res.data.code == 200) {
             var itemObj = res.data.result.songs;
             var temObj = {};
-            temObj["songCount"] = res.data.result.songCount;
             var temArr = [];
+            temObj["songCount"] = res.data.result.songCount;
+            temObj["playList"] = [];
             for (var t in itemObj) {
               var obj = itemObj[t];
+              var songMp3Url = baseUrl + that.$apiUrl.SongMp3Url + obj.id;
+              var songLyric = baseUrl + that.$apiUrl.SongLyric + obj.id;
+
               temArr.push({
                 id: obj.id,
+                artist: obj.artists[0] && obj.artists[0].name,
                 artistsName: obj.artists[0] && obj.artists[0].name,
                 albumName: obj.album && obj.album.name,
+                img1v1Url: obj.artists[0] && obj.artists[0].img1v1Url,
                 keyWord: obj.name,
-                img1v1Url: obj.artists[0] && obj.artists[0].img1v1Url
+                title: obj.album && obj.album.name,
+                pic: obj.artists[0] && obj.artists[0].img1v1Url,
+                // lrc: songLyric.data.lrc && songLyric.data.lrc.lyric,
+                // src: songMp3Url.data.data[0].url
+                lrc: "",
+                src: ""
               });
             }
-            // temObj["showData"] = temArr.slice(0, 10);
             temObj["temArr"] = temArr;
             that.songs = temObj;
           }

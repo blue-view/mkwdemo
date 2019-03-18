@@ -1,5 +1,5 @@
 <template>
-  <div class="m-i-content-listTop-container">
+  <div class="m-i-content-listTop-container" ref="SongListItem" >
     <span class="m-i-content-listTop-container-l">
       <img  :src="TopList.coverImgUrl">
     </span>
@@ -23,6 +23,8 @@ export default {
     return {
       TopList: {}
     };
+  },
+  methods:{
   },
   created: function() {
     var that = this;

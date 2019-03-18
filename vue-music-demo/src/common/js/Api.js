@@ -1,5 +1,6 @@
 
 import axios from 'axios'
+import { Indicator } from 'mint-ui'
 
 axios.defaults.timeout = 50000//默认请求超时
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
@@ -19,46 +20,46 @@ axios.interceptors.response.use(function (response) {
 
 export function getHttp(url, params = {}) {
   // 创建动画mint-ui
-  // Mint.Indicator.open({
-  //   text: '加载中...',
-  //   spinnerType: 'fading-circle'
-  // })
+  Indicator.open({
+    // text: '加载中...',
+    spinnerType: 'snake'
+  })
   return new Promise((resolve, reject) => {
     axios.get(url, {
       params: params
     })
       .then(response => {
         resolve(response)
-        // setTimeout(() => {
-        //   resolve(response)
-        //   // Mint.Indicator.close() // // 关闭动画
-        // }, 1000);
+        setTimeout(() => {
+          resolve(response)
+          Indicator.close() // // 关闭动画
+        }, 1000);
 
       })
       .catch(err => {
         reject(err)
-        // Mint.Indicator.close() // // 关闭动画
+        Indicator.close() // // 关闭动画
         // Mint.MessageBox.alert('message', err)
       })
   })
 }
 export function postHttp(url, data = {}) {
-  // Mint.Indicator.open({
-  //   text: '加载中...',
-  //   spinnerType: 'triple-bounce'
-  // })
+  Indicator.open({
+    // text: '加载中...',
+    spinnerType: 'snake'
+  })
   return new Promise((resolve, reject) => {
     axios.post(url, data)
       .then(response => {
         resolve(response)
-        // setTimeout(function () {
-        //   resolve(response)
-        //   Mint.Indicator.close() // // 关闭动画
-        // }, 1000);
+        setTimeout(function () {
+          resolve(response)
+          Indicator.close() // // 关闭动画
+        }, 1000);
 
       }, (err) => {
         reject(err)
-        // Mint.Indicator.close()
+        Indicator.close()
       })
   })
 }
@@ -66,14 +67,14 @@ export function ApiUrl() {
   return {
     BaseUrl: "http://192.168.191.1:3000/",
     Banner: 'banner',
-    Personalized:'personalized',
-    Album:'top/album?offset=0&limit=8',
-    TopList:'top/list?idx=',
-    HotPlayList:'top/playlist?limit=6&order=new',//精选歌单,
-    Search:'search?keywords=',
-    SearchHot:'search/hot',
-    SongMp3Url:'song/url?id=',
-    SongLyric:'lyric?id='
-
+    Personalized: 'personalized',
+    Album: 'top/album?offset=0&limit=8',
+    TopList: 'top/list?idx=',
+    HotPlayList: 'top/playlist?limit=6&order=new',//精选歌单,
+    Search: 'search?keywords=',
+    SearchHot: 'search/hot',
+    SongMp3Url: 'song/url?id=',
+    SongLyric: 'lyric?id=',
+    PlayListDetail: 'playlist/detail?id='
   }
 }

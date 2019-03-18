@@ -1,7 +1,9 @@
 <template>
   <div class="m-content">
     <keep-alive>
-      <router-view></router-view>
+      <transition name="fade">
+        <router-view></router-view>
+      </transition>
     </keep-alive>
   </div>
 </template>
@@ -17,6 +19,6 @@ export default {
 @import "../common/css/base.scss";
 .m-content {
   padding-top: px2em(80);
-  background:#f6f6f6;
+  background: #f6f6f6;
 }
 </style>

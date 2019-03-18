@@ -1,22 +1,21 @@
 <template>
   <div class="index">
-    <div class="i-slide">
-      <mt-swipe >
-        <mt-swipe-item :key="index" 
-        v-for="(item, index) in items">
-        <img :src="item.imageUrl">
+    <div class="i-slide" v-if="false">
+      <mt-swipe>
+        <mt-swipe-item :key="index" v-for="(item, index) in items">
+          <img :src="item.imageUrl">
         </mt-swipe-item>
       </mt-swipe>
     </div>
     <div class="m-i-content">
       <div class="m-i-content-list">
-        <div class="m-i-content-list-head">
-          <span>热门推荐</span>
+        <div class="m-i-content-list-head" v-if="false">
+          <span>推荐歌单</span>
           <span class="iconfont">更多</span>
         </div>
         <div class="m-i-content-list-item">
           <ul>
-            <li v-for="(item,index) in listPersonalized" :key="index">
+            <li v-for="(item,index) in listPersonalized" :key="index" @click="goLink(item)">
               <span class="pic-item">
                 <span class="pic-content">
                   <img :src="item.picUrl" :alt="item.name">
@@ -31,11 +30,11 @@
             </li>
           </ul>
         </div>
-        <div class="m-i-content-list-head">
+        <div class="m-i-content-list-head" v-if="false">
           <span>精选歌单</span>
           <span class="iconfont">更多</span>
         </div>
-        <div class="m-i-content-list-item">
+        <div class="m-i-content-list-item" v-if="false">
           <ul>
             <li v-for="(item,index) in listTop" :key="index">
               <span class="pic-item">
@@ -74,62 +73,77 @@ export default {
       listTop: []
     };
   },
-
+  methods: {
+    goLink(item) {
+      this.$router.push({
+        name: "indexpagedetail",
+        params: {
+          PlayListDetailId: item.id,
+          picUrl: item.picUrl,
+          name: item.name,
+          playCount: item.playCount
+        }
+      });
+    }
+  },
   created: function() {
     // console.log(new this.$apiUrl());
     let that = this;
     let baseUrl = this.$apiUrl.BaseUrl;
     //banner数据
-    this.$getHttp(baseUrl + this.$apiUrl.Banner).then(function(res) {
-      if (res.data.code == 200) {
-        var itemObj = res.data.banners;
-        for (var item in itemObj) {
-          var obj = itemObj[item];
-          that.items.push({
-            url: "javascript;",
-            imageUrl: obj.imageUrl
-          });
-        }
-      }
-    });
+    // this.$getHttp(baseUrl + this.$apiUrl.Banner).then(function(res) {
+    //   if (res.data.code == 200) {
+    //     var itemObj = res.data.banners;
+    //     for (var item in itemObj) {
+    //       var obj = itemObj[item];
+    //       that.items.push({
+    //         url: "javascript;",
+    //         imageUrl: obj.imageUrl
+    //       });
+    //     }
+    //   }
+    // });
     //热门推荐数据
-    this.$getHttp(baseUrl + this.$apiUrl.Personalized).then(function(res) {
-      if (res.data.code == 200) {
-        var itemObj = res.data.result;
-        var temArr = [];
-        for (var t = 0; t < 2; t++) {
-          var obj = itemObj[t];
-          temArr.push({
-            id: obj.id,
-            name: obj.name,
-            copywriter: obj.copywriter,
-            picUrl: obj.picUrl,
-            canDislike: obj.canDislike,
-            playCount: obj.playCount,
-            highQuality: obj.highQuality,
-            alg: obj.alg
-          });
+    this.$nextTick(function() {
+      this.$getHttp(baseUrl + this.$apiUrl.Personalized).then(function(res) {
+        if (res.data.code == 200) {
+          var itemObj = res.data.result;
+          var temArr = [];
+          for (var t = 0; t < 10; t++) {
+            var obj = itemObj[t];
+            temArr.push({
+              id: obj.id,
+              name: obj.name,
+              copywriter: obj.copywriter,
+              picUrl: obj.picUrl,
+              canDislike: obj.canDislike,
+              playCount: obj.playCount,
+              highQuality: obj.highQuality,
+              alg: obj.alg
+            });
+          }
+          that.listPersonalized = temArr;
         }
-        that.listPersonalized = temArr;
-      }
+      });
     });
+
     //精选歌单
-    this.$getHttp(baseUrl + this.$apiUrl.HotPlayList).then(function(res) {
-      if (res.data.code == 200) {
-        var itemObj = res.data.playlists;
-        var temArr = [];
-        for (var t = 0; t < itemObj.length; t++) {
-          var obj = itemObj[t];
-          temArr.push({
-            playCount: obj.playCount,
-            id: obj.id,
-            coverImgUrl: obj.coverImgUrl,
-            name: obj.name
-          });
-        }
-        that.listTop = temArr;
-      }
-    });
+    // this.$getHttp(baseUrl + this.$apiUrl.HotPlayList).then(function(res) {
+    //   if (res.data.code == 200) {
+    //     var itemObj = res.data.playlists;
+    //     var temArr = [];
+    //     for (var t = 0; t < itemObj.length; t++) {
+    //       var obj = itemObj[t];
+    //       temArr.push({
+    //         playCount: obj.playCount,
+    //         id: obj.id,
+    //         coverImgUrl: obj.coverImgUrl,
+    //         name: obj.name
+    //       });
+    //     }
+    //     that.listTop = temArr;
+    //   }
+    // });
   }
 };
 </script>
@@ -141,15 +155,15 @@ export default {
   width: 100%;
   height: px2em(128);
 }
-.i-slide img{
-  width:100%;
-  height:100%;
+.i-slide img {
+  width: 100%;
+  height: 100%;
   display: block;
 }
 .m-i-content {
   width: px2em(300);
   margin: 0 auto;
-  margin-top: px2em(10);
+  // margin-top: px2em(10);
 }
 .m-i-content-list-head {
   width: 100%;
@@ -201,7 +215,7 @@ export default {
   width: 100%;
   height: auto;
   overflow-x: hidden;
-  margin-top: px2em(10);
+  // margin-top: px2em(10);
 }
 .m-i-content-list-item > ul {
   display: flex;
